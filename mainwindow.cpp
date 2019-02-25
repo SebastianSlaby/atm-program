@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowTitle("ATM");
     ui->pinInput->setAlignment(Qt::AlignCenter);
     QFont pinFont = ui->pinInput->font();
     pinFont.setPointSize(32);
@@ -35,3 +36,12 @@ void MainWindow::checkPin(){
 
 }
 
+void MainWindow::withdraw(){
+
+
+}
+
+void MainWindow::deposit(){
+
+
+}
