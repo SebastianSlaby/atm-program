@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = atm
+TARGET = app
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -26,10 +26,12 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    client.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    client.h
 
 FORMS += \
         mainwindow.ui

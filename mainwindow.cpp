@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowTitle("ATM");
     ui->pinInput->setAlignment(Qt::AlignCenter);
     QFont pinFont = ui->pinInput->font();
     pinFont.setPointSize(32);
@@ -16,8 +17,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pinInput->setFocus();
     ui->pinInput->setInputMask("9999");
     ui->pinInput->setEchoMode(QLineEdit::Password);
-    QShortcut *shortcut = new QShortcut(QKeySequence("Enter"),ui->pinSubmitButton);
+    QShortcut *shortcut = new QShortcut(QKeySequence("Return"),ui->pinSubmitButton);
+    QShortcut *shortcut2 = new QShortcut(QKeySequence("Enter"),ui->pinSubmitButton);
     connect(shortcut,SIGNAL(activated()),this,SLOT(checkPin()));
+    connect(shortcut2,SIGNAL(activated()),this,SLOT(checkPin()));
 
 }
 
@@ -35,3 +38,12 @@ void MainWindow::checkPin(){
 
 }
 
+void MainWindow::withdraw(){
+
+
+}
+
+void MainWindow::deposit(){
+
+
+}

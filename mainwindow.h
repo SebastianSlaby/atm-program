@@ -21,6 +21,8 @@ private:
 
 private slots:
     void checkPin();
+    void withdraw();
+    void deposit();
 };
 
 #endif // MAINWINDOW_H
