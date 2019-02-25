@@ -1,5 +1,5 @@
 # atm-program
-GUI application to interface with an ATM for school
+GUI application to interface with an ATM for school developed using Qt
 
 3 POINTS:  
   -classes and objects <break>  
