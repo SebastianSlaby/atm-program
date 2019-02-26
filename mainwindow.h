@@ -6,6 +6,8 @@
 #include <client.h>
 #include <reportwindow.h>
 #include <QDateTime>
+#include <QFile>
+#include <QTextStream>
 
 
 namespace Ui {
@@ -24,6 +26,9 @@ private:
     Ui::MainWindow *ui;
     client *currentUser;
     reportWindow *r;
+    void logWithdrawal();
+    void logDeposit();
+    bool lastOperationWasDeposit;
 
 private slots:
     void checkPin();

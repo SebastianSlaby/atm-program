@@ -17,3 +17,7 @@ double client::getCurrentBalance(){
 void client::withdraw(double amount){
     this->currentBalance-=amount;
 }
+
+void client::deposit(double amount){
+    this->currentBalance+=amount;
+}

@@ -9,7 +9,7 @@ public:
     QString getFullName();
     double getCurrentBalance();
     void withdraw(double amount);
-    void deposit(int);
+    void deposit(double amount);
 private:
     double currentBalance;
     QString fullName;

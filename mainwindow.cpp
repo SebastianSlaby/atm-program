@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->withdrawButton,SIGNAL(clicked()),this,SLOT(withdraw()));
     connect(ui->reportConfirmationButtons,SIGNAL(accepted()),this,SLOT(createReport()));
     connect(ui->reportConfirmationButtons,SIGNAL(rejected()),this,SLOT(closeHandler()));
+    connect(ui->depositButton,SIGNAL(clicked()),this,SLOT(deposit()));
     //
     ui->pinInput->setFocus();
     ui->pinInput->setInputMask("9999");
@@ -31,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->reportConfirmationButtons->setVisible(false);
     ui->balanceTitleLabel->setVisible(false);
     ui->nameTitleLabel->setVisible(false);
+    bool lastOperationWasDeposit;
 
 }
 
@@ -61,6 +63,7 @@ void MainWindow::checkPin(){
 }
 
 void MainWindow::withdraw(){
+    lastOperationWasDeposit=false;
     this->currentUser->withdraw(static_cast<double>( ui->withdrawSpinBox->value()));
     QString text=QString::number(this->currentUser->getCurrentBalance());
     ui->balanceLabel->setText(text);
@@ -69,11 +72,23 @@ void MainWindow::withdraw(){
     ui->withdrawButton->setEnabled(false);
     ui->depositButton->setEnabled(false);
     ui->withdrawSpinBox->setEnabled(false);
+    ui->depositSpinBox->setEnabled(false);
+    logWithdrawal();
 
 }
 
 void MainWindow::deposit(){
-
+    lastOperationWasDeposit=true;
+    this->currentUser->deposit(static_cast<double>(ui->depositSpinBox->value()));
+    QString text=QString::number(this->currentUser->getCurrentBalance());
+    ui->balanceLabel->setText(text);
+    ui->reportConfirmationLabel->setVisible(true);
+    ui->reportConfirmationButtons->setVisible(true);
+    ui->withdrawButton->setEnabled(false);
+    ui->depositButton->setEnabled(false);
+    ui->withdrawSpinBox->setEnabled(false);
+    ui->depositSpinBox->setEnabled(false);
+    logDeposit();
 
 }
 
@@ -83,22 +98,41 @@ void MainWindow::closeHandler(){
     ui->withdrawButton->setEnabled(true);
     ui->depositButton->setEnabled(true);
     ui->withdrawSpinBox->setEnabled(true);
+    ui->depositSpinBox->setEnabled(true);
 }
 
 void MainWindow::createReport(){
     ui->reportConfirmationLabel->setVisible(false);
     ui->reportConfirmationButtons->setVisible(false);
-    QString report="Name\n\t";
+    QString report="Operation type";
+    if(lastOperationWasDeposit){
+        report.append("\n\t").append("deposit");
+    }else {
+        report.append("\n\t").append("withdrawal");
+    }
+    report.append("\nName\n\t");
     report.append( ui->nameLabel->text());
-    QString beforeS = (ui->balanceLabel->text());
-    double beforeD = beforeS.toDouble() + ui->withdrawSpinBox->value();
-    report.append("\n").append("Balance before transaction");
-    report.append("\n\t").append(QString::number(beforeD));
+    if(lastOperationWasDeposit){
+        QString beforeS = (ui->balanceLabel->text());
+        double beforeD = beforeS.toDouble() - ui->depositSpinBox->value();
+        report.append("\n").append("Balance before transaction");
+        report.append("\n\t").append(QString::number(beforeD));
+
+    }else {
+        QString beforeS = (ui->balanceLabel->text());
+        double beforeD = beforeS.toDouble() + ui->withdrawSpinBox->value();
+        report.append("\n").append("Balance before transaction");
+        report.append("\n\t").append(QString::number(beforeD));
+    }
+
+    report.append("\n").append("Transaction amount");
+    if(lastOperationWasDeposit){
+        report.append("\n\t").append(QString::number(ui->depositSpinBox->value()));
+    }else {
+        report.append("\n\t").append(QString::number(ui->withdrawSpinBox->value()));
+    }
     report.append("\n").append("Balance after transaction");
     report.append("\n\t").append(ui->balanceLabel->text());
-    report.append("\n").append("Transaction amount");
-    report.append("\n\t").append(QString::number(ui->withdrawSpinBox->value()));
- //   QDateTime datetime:: ("dd,MM,yyyy HH:mm:ss");
     QDateTime current = QDateTime::currentDateTime();
     report.append("\n").append("Transaction date and hour");
     report.append("\n\t").append(current.toString("dd.MM.yyyy HH:mm:ss"));
@@ -108,9 +142,45 @@ void MainWindow::createReport(){
     ui->withdrawButton->setEnabled(true);
     ui->depositButton->setEnabled(true);
         ui->withdrawSpinBox->setEnabled(true);
+        ui->depositSpinBox->setEnabled(true);
         connect(r,SIGNAL(destroyed()),this,SLOT(enableWindow()));
 }
 
 void MainWindow::enableWindow(){
     this->setEnabled(true);
+}
+
+void MainWindow::logWithdrawal(){
+    QFile f("./transactions.txt");
+    if (f.open(QIODevice::WriteOnly | QIODevice::Append)) {
+        QTextStream out(&f);
+        QString logText=ui->nameLabel->text();
+        QString beforeS = (ui->balanceLabel->text());
+        double beforeD = beforeS.toDouble() + ui->withdrawSpinBox->value();
+        logText.append("|").append(QString::number(beforeD));
+        logText.append("|").append(QString::number( ui->withdrawSpinBox->value()));
+        logText.append("|").append(ui->balanceLabel->text());
+        QDateTime current = QDateTime::currentDateTime();
+        logText.append("|").append(current.toString("dd.MM.yyyy HH:mm:ss"));
+        logText.append("|").append("W");
+        out<<logText;
+        out<<"\n";
+    }
+}
+void MainWindow::logDeposit(){
+    QFile f("./transactions.txt");
+    if (f.open(QIODevice::WriteOnly | QIODevice::Append)) {
+        QTextStream out(&f);
+        QString logText=ui->nameLabel->text();
+        QString beforeS = (ui->balanceLabel->text());
+        double beforeD = beforeS.toDouble() + ui->depositSpinBox->value();
+        logText.append("|").append(QString::number(beforeD));
+        logText.append("|").append(QString::number( ui->depositSpinBox->value()));
+        logText.append("|").append(ui->balanceLabel->text());
+        QDateTime current = QDateTime::currentDateTime();
+        logText.append("|").append(current.toString("dd.MM.yyyy HH:mm:ss"));
+        logText.append("|").append("D");
+        out<<logText;
+        out<<"\n";
+    }
 }

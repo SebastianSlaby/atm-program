@@ -41,9 +41,9 @@
       <widget class="QWidget" name="scrollAreaWidgetContents">
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>-44</x>
          <y>0</y>
-         <width>840</width>
+         <width>842</width>
          <height>584</height>
         </rect>
        </property>
@@ -63,7 +63,47 @@
         <property name="spacing">
          <number>0</number>
         </property>
-        <item row="6" column="3">
+        <item row="3" column="3">
+         <layout class="QVBoxLayout" name="reportHandler">
+          <item>
+           <widget class="QLabel" name="reportConfirmationLabel">
+            <property name="text">
+             <string>Do you want to generate a report?</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDialogButtonBox" name="reportConfirmationButtons">
+            <property name="standardButtons">
+             <set>QDialogButtonBox::No|QDialogButtonBox::Yes</set>
+            </property>
+            <property name="centerButtons">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="3">
+         <widget class="QLineEdit" name="pinInput"/>
+        </item>
+        <item row="4" column="4">
+         <widget class="QPushButton" name="pinSubmitButton">
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Submit</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="3">
          <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -141,7 +181,7 @@
           </item>
          </layout>
         </item>
-        <item row="6" column="0">
+        <item row="7" column="0">
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <widget class="QSpinBox" name="withdrawSpinBox">
@@ -174,57 +214,31 @@
           </item>
          </layout>
         </item>
-        <item row="6" column="4">
-         <widget class="QPushButton" name="depositButton">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>300</width>
-            <height>100</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Deposit</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="3">
-         <widget class="QLineEdit" name="pinInput"/>
-        </item>
-        <item row="4" column="4">
-         <widget class="QPushButton" name="pinSubmitButton">
-          <property name="maximumSize">
-           <size>
-            <width>200</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Submit</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="3">
-         <layout class="QVBoxLayout" name="reportHandler">
+        <item row="7" column="4">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QLabel" name="reportConfirmationLabel">
-            <property name="text">
-             <string>Do you want to generate a report?</string>
-            </property>
+           <widget class="QSpinBox" name="depositSpinBox">
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+            <property name="maximum">
+             <number>20000</number>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QDialogButtonBox" name="reportConfirmationButtons">
-            <property name="standardButtons">
-             <set>QDialogButtonBox::No|QDialogButtonBox::Yes</set>
+           <widget class="QPushButton" name="depositButton">
+            <property name="enabled">
+             <bool>false</bool>
             </property>
-            <property name="centerButtons">
-             <bool>true</bool>
+            <property name="minimumSize">
+             <size>
+              <width>300</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Deposit</string>
             </property>
            </widget>
           </item>
