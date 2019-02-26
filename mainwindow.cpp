@@ -21,6 +21,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QShortcut *shortcut2 = new QShortcut(QKeySequence("Enter"),ui->pinSubmitButton);
     connect(shortcut,SIGNAL(activated()),this,SLOT(checkPin()));
     connect(shortcut2,SIGNAL(activated()),this,SLOT(checkPin()));
+    ui->nameLabel->setVisible(false);
+    ui->balanceLabel->setVisible(false);
+    ui->withdrawSpinBox->setAlignment(Qt::AlignCenter);
 
 }
 
@@ -30,10 +33,18 @@ MainWindow::~MainWindow()
 }
 void MainWindow::checkPin(){
     if(ui->pinInput->text()=="2137"){
+        client currentUser=client(12345, "Sebastian Słaby");
         delete ui->pinInput;
         delete ui->pinSubmitButton;
         ui->withdrawButton->setEnabled(true);
         ui->depositButton->setEnabled(true);
+        ui->nameLabel->setVisible(true);
+        ui->nameLabel->setText(currentUser.getFullName());
+        ui->nameLabel->setAlignment(Qt::AlignCenter);
+        ui->balanceLabel->setVisible(true);
+        ui->balanceLabel->setText(QString::number(currentUser.getCurrentBalance()));
+        ui->balanceLabel->setAlignment(Qt::AlignCenter);
+
     }
 
 }

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QShortcut>
+#include <client.h>
 
 namespace Ui {
 class MainWindow;
