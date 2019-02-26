@@ -15,6 +15,7 @@ ADDITIONAL POINTS:
   1. Uses Qt for GUI  
     - responsive  
     - scales to small and big size
+    - keyboard support for confirmation of PIN
   2. Logging every transaction to a text file  
     - in format Name|BalanceBeforeTransaction|TransactionAmount|BalanceAfterTransaction|Date|Date Time|Type of operation  
   3. Possibility to create a report after each withdrawal and deposit
