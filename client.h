@@ -5,11 +5,13 @@
 class client
 {
 public:
-    client(int currentBalance,QString fullName);
+    client(double currentBalance,QString fullName);
     QString getFullName();
-    int getCurrentBalance();
+    double getCurrentBalance();
+    void withdraw(double amount);
+    void deposit(int);
 private:
-    int currentBalance;
+    double currentBalance;
     QString fullName;
 };
 

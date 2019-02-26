@@ -1,6 +1,6 @@
 #include "client.h"
 
-client::client(int currentBalance, QString fullName)
+client::client(double currentBalance, QString fullName)
 {
     this->currentBalance = currentBalance;
     this->fullName = fullName;
@@ -10,6 +10,10 @@ QString client::getFullName(){
     return this->fullName;
 }
 
-int client::getCurrentBalance(){
+double client::getCurrentBalance(){
     return this->currentBalance;
+}
+
+void client::withdraw(double amount){
+    this->currentBalance-=amount;
 }

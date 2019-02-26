@@ -19,11 +19,14 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    client *currentUser;
 
 private slots:
     void checkPin();
     void withdraw();
     void deposit();
+    void createReport();
+    void closeHandler();
 };
 
 #endif // MAINWINDOW_H
