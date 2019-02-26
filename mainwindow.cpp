@@ -32,7 +32,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->reportConfirmationButtons->setVisible(false);
     ui->balanceTitleLabel->setVisible(false);
     ui->nameTitleLabel->setVisible(false);
-    bool lastOperationWasDeposit;
+    ui->depositSpinBox->setEnabled(false);
+    ui->withdrawSpinBox->setEnabled(false);
 
 }
 
@@ -47,6 +48,8 @@ void MainWindow::checkPin(){
         delete ui->pinSubmitButton;
         ui->withdrawButton->setEnabled(true);
         ui->depositButton->setEnabled(true);
+        ui->depositSpinBox->setEnabled(true);
+        ui->withdrawSpinBox->setEnabled(true);
         ui->nameLabel->setVisible(true);
         ui->nameLabel->setText(currentUser->getFullName());
         ui->nameLabel->setAlignment(Qt::AlignCenter);
