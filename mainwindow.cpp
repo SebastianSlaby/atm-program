@@ -31,7 +31,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->reportConfirmationButtons->setVisible(false);
     ui->balanceTitleLabel->setVisible(false);
     ui->nameTitleLabel->setVisible(false);
-    client *currentUser;
 
 }
 
@@ -67,6 +66,9 @@ void MainWindow::withdraw(){
     ui->balanceLabel->setText(text);
     ui->reportConfirmationLabel->setVisible(true);
     ui->reportConfirmationButtons->setVisible(true);
+    ui->withdrawButton->setEnabled(false);
+    ui->depositButton->setEnabled(false);
+    ui->withdrawSpinBox->setEnabled(false);
 
 }
 
@@ -78,9 +80,37 @@ void MainWindow::deposit(){
 void MainWindow::closeHandler(){
     ui->reportConfirmationLabel->setVisible(false);
     ui->reportConfirmationButtons->setVisible(false);
-
+    ui->withdrawButton->setEnabled(true);
+    ui->depositButton->setEnabled(true);
+    ui->withdrawSpinBox->setEnabled(true);
 }
 
 void MainWindow::createReport(){
+    ui->reportConfirmationLabel->setVisible(false);
+    ui->reportConfirmationButtons->setVisible(false);
+    QString report="Name\n\t";
+    report.append( ui->nameLabel->text());
+    QString beforeS = (ui->balanceLabel->text());
+    double beforeD = beforeS.toDouble() + ui->withdrawSpinBox->value();
+    report.append("\n").append("Balance before transaction");
+    report.append("\n\t").append(QString::number(beforeD));
+    report.append("\n").append("Balance after transaction");
+    report.append("\n\t").append(ui->balanceLabel->text());
+    report.append("\n").append("Transaction amount");
+    report.append("\n\t").append(QString::number(ui->withdrawSpinBox->value()));
+ //   QDateTime datetime:: ("dd,MM,yyyy HH:mm:ss");
+    QDateTime current = QDateTime::currentDateTime();
+    report.append("\n").append("Transaction date and hour");
+    report.append("\n\t").append(current.toString("dd.MM.yyyy HH:mm:ss"));
+    r = new reportWindow(report,this);
+    r->show();
+    this->setEnabled(false);
+    ui->withdrawButton->setEnabled(true);
+    ui->depositButton->setEnabled(true);
+        ui->withdrawSpinBox->setEnabled(true);
+        connect(r,SIGNAL(destroyed()),this,SLOT(enableWindow()));
+}
 
+void MainWindow::enableWindow(){
+    this->setEnabled(true);
 }

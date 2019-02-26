@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QShortcut>
 #include <client.h>
+#include <reportwindow.h>
+#include <QDateTime>
+
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +23,7 @@ public:
 private:
     Ui::MainWindow *ui;
     client *currentUser;
+    reportWindow *r;
 
 private slots:
     void checkPin();
@@ -27,6 +31,7 @@ private slots:
     void deposit();
     void createReport();
     void closeHandler();
+    void enableWindow();
 };
 
 #endif // MAINWINDOW_H

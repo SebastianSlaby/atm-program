@@ -27,14 +27,17 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    client.cpp
+    client.cpp \
+    reportwindow.cpp
 
 HEADERS += \
         mainwindow.h \
-    client.h
+    client.h \
+    reportwindow.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    reportwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

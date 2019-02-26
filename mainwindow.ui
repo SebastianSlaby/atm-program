@@ -43,8 +43,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>798</width>
-         <height>598</height>
+         <width>840</width>
+         <height>584</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
@@ -211,7 +211,7 @@
           <item>
            <widget class="QLabel" name="reportConfirmationLabel">
             <property name="text">
-             <string>TextLabel</string>
+             <string>Do you want to generate a report?</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
